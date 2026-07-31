@@ -10,7 +10,11 @@ public class Carro {
     }
 
     public double calcularValorAluguel(int dias){
-        return dias*valorDiario;
+        double desconto=0;
+        if (dias>=5){
+            desconto=50;
+        }
+        return (dias*valorDiario)-desconto;
     }
 
     public String getModelo() {
