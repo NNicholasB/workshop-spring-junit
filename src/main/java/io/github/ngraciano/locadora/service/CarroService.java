@@ -39,7 +39,7 @@ public class CarroService {
     public void deletar(Long id){
         var carroExistente=repository.findById(id).orElseThrow(()->new EntityNotFoundException("Carro nao encontrado"));
 
-        repository.deleteById(id);
+        repository.deleteById(carroExistente.getId());
     }
 
     public CarroEntity buscarPorId(Long id){
