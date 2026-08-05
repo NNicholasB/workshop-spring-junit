@@ -1,13 +1,11 @@
 package io.github.ngraciano.locadora.controller;
 
 import io.github.ngraciano.locadora.entity.CarroEntity;
+import io.github.ngraciano.locadora.exception.EntityNotFoundException;
 import io.github.ngraciano.locadora.service.CarroService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/carros")
@@ -29,5 +27,15 @@ public class CarroController {
         }
 
           }
+
+    @GetMapping("{id}")
+    public ResponseEntity<CarroEntity> detalhesCarro(@PathVariable Long id){
+        try{
+            var carroEncontrado=service.buscarPorId(id);
+            return ResponseEntity.ok(carroEncontrado);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }
